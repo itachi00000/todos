@@ -1,6 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// style
+const btnStyle = {
+  background: '#ff0000',
+  color: '#fff',
+  padding: '5px 9px',
+  marginRight: '25px',
+  borderRadius: '50%',
+  cursor: 'pointer',
+  float: 'right'
+};
+
+//
 class TodoItem extends React.Component {
   constructor() {
     super();
@@ -18,16 +30,14 @@ class TodoItem extends React.Component {
   }
 
   render() {
-    const { title, id } = this.props.todo;
+    const { todo, delTodo, markComplete } = this.props;
+    const { title, id } = todo;
+
     return (
-      <div className="" style={this.getStyle()}>
+      <div style={this.getStyle()}>
         <p>
-          <input
-            type="checkbox"
-            onChange={this.props.markComplete.bind(this, id)}
-          />{' '}
-          {title}{' '}
-          <button style={btnStyle} onClick={this.props.delTodo.bind(this, id)}>
+          <input type="checkbox" onChange={() => markComplete(id)} /> {title}
+          <button type="button" style={btnStyle} onClick={() => delTodo(id)}>
             x
           </button>
         </p>
@@ -38,16 +48,6 @@ class TodoItem extends React.Component {
 
 TodoItem.propTypes = {
   todo: PropTypes.object.isRequired
-};
-
-const btnStyle = {
-  background: '#ff0000',
-  color: '#fff',
-  padding: '5px 9px',
-  marginRight: '25px',
-  borderRadius: '50%',
-  cursor: 'pointer',
-  float: 'right'
 };
 
 export default TodoItem;
